@@ -5,7 +5,7 @@ const Timer = ({
 	secondRemaining,
 }: {
 	dispatch: React.Dispatch<any>;
-	secondRemaining: number | null;
+	secondRemaining: number;
 }) => {
 	const mins = Math.floor(secondRemaining / 60);
 	const seconds = secondRemaining % 60;

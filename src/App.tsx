@@ -28,7 +28,7 @@ interface InitialProps {
 	answer: number | null;
 	points: number;
 	highScore: number;
-	secondRemaining: number | null;
+	secondRemaining: number;
 }
 
 const initialState: InitialProps = {
@@ -38,7 +38,7 @@ const initialState: InitialProps = {
 	answer: null,
 	points: 0,
 	highScore: 0,
-	secondRemaining: 10,
+	secondRemaining: 0,
 };
 
 type Action =
@@ -102,9 +102,6 @@ function reducer(state: InitialProps, action: Action): InitialProps {
 				secondRemaining: state.secondRemaining - 1,
 				status: state.secondRemaining === 0 ? "finished" : state.status,
 			};
-
-		default:
-			throw new Error("Unknown action");
 	}
 }
 
@@ -123,7 +120,7 @@ function App() {
 		fetch("http://localhost:8000/questions")
 			.then((res) => res.json())
 			.then((data) => dispatch({ type: "dataReceived", payload: data }))
-			.catch((err) => dispatch({ type: "dataFailed" }));
+			.catch(() => dispatch({ type: "dataFailed" }));
 	}, []);
 	return (
 		<div className="app">
