@@ -1,12 +1,19 @@
-import { QuestionProp, useQuiz } from "../contexts/QuizContext";
+import { QuestionProp } from "../App";
 
-const Options = ({ question }: { question: QuestionProp | undefined }) => {
-	const { dispatch, answer } = useQuiz();
+const Options = ({
+	question,
+	dispatch,
+	answer,
+}: {
+	question: QuestionProp;
+	dispatch: React.Dispatch<any>;
+	answer: number | null;
+}) => {
 	const hasAnswered = answer != null;
 
 	return (
 		<div className="options">
-			{question?.options.map((option, index) => (
+			{question.options.map((option, index) => (
 				<button
 					className={`btn btn-option ${index === answer ? "answer" : ""} ${
 						hasAnswered
